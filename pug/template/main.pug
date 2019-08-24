@@ -1,0 +1,35 @@
+- var lang = 'ru';
+- var title = 'Это заголовок страницы';
+
+doctype
+html
+    head (lang = #{lang})
+        block link
+            link(rel = 'stylesheet' href = '../css/normalize.css')
+            link(rel = 'stylesheet' href = '../css/style.css')
+
+        block metas
+            meta(charset="utf-8")
+            meta(name="description" content="")
+            meta(name="title" content="")
+            meta(name="viewport" content="width=device-width, initial-scale=1")
+            //- для кириллицы используется атрибут windows-1251 или KOI-8R
+            //- Content-type. Включает данные о типе документа и кодировке
+            meta(http-equiv="Content-type" content="text/html;charset=windows-1251")
+            //- Robots. Показывает поисковому роботу, какие страницы следует включать в индекс, а какие — нет. Данный тег предполагает ряд дополнительных атрибутов: index/noindex (можно/нельзя индексировать); follow/nofollow (учитывать/не учитывать гиперссылки); all/none (открыть/закрыть для индексации страницу и гиперссылки). 
+            meta(name="robots" content="noindex")
+            //- Refresh. Позволяет задать время обновления страницы при загрузке либо переадресации пользователя в другой раздел. Тег полезен в случае обновления сайта: вместо страницы ошибки 404 или длительной загрузки перенаправляет пользователя в новый раздел.
+            meta(http-equiv="refresh" content="N; url=URL")
+            //- Meta Author и Copyright. Этими тегами можно прописать авторство графического и текстового содержимого страницы.
+            meta(name="Author" content="ФИО автора")
+            meta(name="Copyright" content="кому принадлежат авторские права")
+            meta(name="Address" content="адрес где создавался контент") 
+
+        title
+            block title #{title}
+    
+    body
+        block content
+
+        block javascript
+
