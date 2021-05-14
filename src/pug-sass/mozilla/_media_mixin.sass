@@ -1,0 +1,60 @@
+@import 'companyheader/_media.sass'
+@import 'aboutourcompany/_media.sass'
+@import 'CorporateDevelopment/_media.sass'
+@import 'people/_media.sass'
+@import 'consulting/_media.sass'
+@import 'dreamapp/_media.sass'
+@import 'CorporateTraining/_media.sass'
+@import 'locationcontact/_media.sass'
+@import 'sublocationcontact/_media.sass'
+@import 'footer/_media.sass'
+
+@media only screen  and (min-width: 1200px)
+  @include companyheader1200
+  @include dreamapp1200
+
+@media only screen  and (min-width: 992px) and ( max-width:  1024px)
+  @include corporatedevelopment_992_1024
+  @include dreamapp992_1024
+  @include Corporatetrading_992_1024
+  @include locationcontact992_1024
+
+@media only screen  and (min-width: 768px) and ( max-width:  991px)
+  @include corporatedevelopment_768_991
+  @include consulting768_991
+  @include dreamapp768_991
+  @include Corporatetrading_768_991
+  @include locationcontact768_991
+
+@media only screen  and (min-width: 576px) and ( max-width:  767px)
+  @include companyheader_576_767
+  @include corporatedevelopment576_767
+  @include people576_767
+  @include consulting576_767
+  @include dreamapp576_767
+  @include Corporatetrading_576_767
+  @include locationcontact576_767
+
+@media only screen  and (min-width: 480px) and ( max-width:  575px)
+  @include companyheader_480_575
+  @include aboutourcompany_480_576
+  @include corporatedevelopment480_575
+  @include people480_575
+  @include consulting480_575
+  @include dreamapp480_576
+  @include Corporatetrading_480_575
+  @include locationcontact480_575
+  @include sublocationcontact480_575
+  @include footer480_575
+
+@media only screen  and (min-width: 320px) and ( max-width:  479px)
+  @include companyheader_320_480
+  @include aboutourcompany_480_576
+  @include corporatedevelopment320_480
+  @include people320_480
+  @include consulting320_479
+  @include dreamapp320_479
+  @include Corporatetrading320_479
+  @include locationcontact320_479
+  @include sublocationcontact480_575
+  @include footer480_575

@@ -1,0 +1,50 @@
+include ../varconf/_varconf
+
+doctype
+html(lang=lang)
+
+	head
+			block link
+				//- link(rel = 'stylesheet' href = path_css + "normalize.css")
+				//- link(rel = 'stylesheet' href = path_css + "style.min.css")
+				link(rel = 'stylesheet' href = path_css_src + "style.css")
+				//- link(rel = 'stylesheet' href = path_css_page + "style.css")
+				//link(rel='preconnect' href='https://fonts.gstatic.com')
+				//link(href='https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap' rel='stylesheet')
+
+
+			block metas
+				meta(charset="utf-8")
+				meta(name="description" content="")
+				meta(name="title" content="Обзор новых возможностей")
+				meta(name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit-no")
+				//- для корректной работы сайта в браузерах explorer
+				//-meta(http-equiv= 'X-UA-Compatible', content="IE=Edge")
+				//-meta(http-equiv= 'refresh', content="25, http://km.ru")
+				//-meta(http-equiv= 'refresh', content="35, http://google.com")
+
+				//- для кириллицы используется атрибут windows-1251 или KOI-8R
+				//- Content-type. Включает данные о типе документа и кодировке
+				//- meta(http-equiv="Content-type" content="text/html;charset=windows-1251")
+				//- Robots. Показывает поисковому роботу, какие страницы следует включать в индекс, а какие — нет. Данный тег предполагает ряд дополнительных атрибутов: index/noindex (можно/нельзя индексировать); follow/nofollow (учитывать/не учитывать гиперссылки); all/none (открыть/закрыть для индексации страницу и гиперссылки).
+				meta(name="robots" content="noindex")
+				//- Refresh. Позволяет задать время обновления страницы при загрузке либо переадресации пользователя в другой раздел. Тег полезен в случае обновления сайта: вместо страницы ошибки 404 или длительной загрузки перенаправляет пользователя в новый раздел.
+				//-  meta(http-equiv="refresh" content="N; url= ")
+				//- Meta Author и Copyright. Этими тегами можно прописать авторство графического и текстового содержимого страницы.
+				meta(name="Author" content="ФИО автора")
+				meta(name="Copyright" content="кому принадлежат авторские права")
+				meta(name="Address" content="адрес где создавался контент")
+
+			block title
+				title #{title}
+
+	body
+		block content
+			//- include MixinHeaderMobile
+
+
+		block scripts
+			script(src=jquery_gulp)
+			script(src=js_bundle_btsp)
+			script(src=js_bootstrap)
+			//- script(src="../../js/menu.js")

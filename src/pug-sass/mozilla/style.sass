@@ -1,0 +1,107 @@
+
+//файл переменных
+@import "mozilla/_var.sass"
+
+//Fonts
+@font-face
+  font-family: TrainOneR
+  src: url(../font/)
+@font-face
+  font-family: Arimo
+  src: url(../font/arimo/Arimo-VariableFont_wght.ttf)
+@font-face
+  font-family: Lemonada
+  src: url('../font/Lemonada/Lemonada-VariableFont_wght.ttf')
+
+@font-face
+  font-family: Inter
+  src: url(../font/Inter/)
+
+@font-face
+  font-family: jura
+  src: url(../font/Jura/)
+
+@font-face
+  font-family: Roboto
+  src: url('../font/Roboto/Roboto-Light.ttf')
+  font-weight: 300
+  font-style: normal
+@font-face
+  font-family: Roboto
+  src: url('../font/Roboto/Roboto-Medium.ttf')
+  font-weight: 500
+  font-style: normal
+@font-face
+  font-family: Roboto
+  src: url('../font/Roboto/Roboto-Bold.ttf')
+  font-weight: 700
+  font-style: bold
+
+
+@font-face
+  font-family: 'Open Sans'
+  src: url(../font/Open_Sans/OpenSans-Light.ttf)
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'Open Sans'
+  src: url(../font/Open_Sans/OpenSans-Regular.ttf)
+  font-weight: 400
+  font-style: normal
+@font-face
+  font-family: 'Open Sans'
+  src: url(../font/Open_Sans/OpenSans-Bold.ttf)
+  font-weight: bold
+  font-style: normal
+
+@font-face
+  font-family: OpenSansCondensed
+  src: url(../font/Open_Sans_Condensed/)
+@font-face
+  font-family: Oswald
+  src: url(../font/Oswald/Oswald-VariableFont_wght.ttf)
+
+
+@font-face
+  font-family: Playfair
+  src: url(../font/Playfair/static/PlayfairDisplay-Regular.ttf)
+  font-weight: 400
+  font-style: normal
+@font-face
+  font-family: Playfair
+  src: url(../font/Playfair/static/PlayfairDisplay-Italic.ttf)
+  font-weight: 400
+  font-style: italic
+@font-face
+  font-family: Playfair
+  src: url(../font/Playfair/PlayfairDisplay-Italic-VariableFont_wght.ttf)
+  font-weight: 700
+  font-style: italic
+
+
+// import модулей bootstrap
+@import  "../../gulp/node_modules/bootstrap/scss/bootstrap-reboot"
+@import  "../../gulp/node_modules/bootstrap/scss/bootstrap-grid"
+@import  "../../gulp/node_modules/bootstrap/scss/grid"
+@import  "../../gulp/node_modules/bootstrap/scss/bootstrap"
+@import  "../../gulp/node_modules/bootstrap/scss/_variables"
+
+// import моих стилей
+@import "header/_header"
+@import "companyheader/_companyheader"
+@import "aboutourcompany/_aboutourcompany"
+@import "CorporateDevelopment/_corporetedevelopmen"
+@import "people/_people"
+@import "consulting/_consulting"
+@import "dreamapp/_dreamapp"
+@import "CorporateTraining/_corporatetraiding"
+@import "locationcontact/_locationcontact"
+@import "sublocationcontact/_sublocationcontact"
+@import "footer/_footer"
+
+body
+  background: $big-color4
+
+
+@import '_media_mixin.sass'
