@@ -13,11 +13,11 @@ const sourcemaps          = require('gulp-sourcemaps');
 
 
 //запуск шаблонизатора pug
-gulp.task('pug-mozilla', () =>  {
+gulp.task('pug', () =>  {
   console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
   console.log('Start Pug');
   console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
-  return gulp.src('../src/pug-sass/**/*.pug')
+  return gulp.src('../src/pug-sass/*.pug')
   .pipe(plumber())
   .pipe(pug({
     // Your options in here.
@@ -26,7 +26,7 @@ gulp.task('pug-mozilla', () =>  {
   .pipe(rename({
     extname: '.php'
   }))
-  .pipe(gulp.dest('../src/php/'))
+  // .pipe(gulp.dest('../src/php/'))
   .pipe(gulp.dest('../'))
   .pipe(plumber.stop())
 });
@@ -67,15 +67,14 @@ gulp.task('webkit_sass', () => {
 gulp.task('watch', () => {
   gulp.watch('../src/pug-sass/mozilla/**/*.sass', ['mozilla_sass']);
   gulp.watch('../src/pug-sass/mozilla/*.sass', ['mozilla_sass']);
+  gulp.watch('../src/pug-sass/webkit/**/*.sass', ['mozilla_sass']);
+  gulp.watch('../src/pug-sass/webkit/*.sass', ['mozilla_sass']);
 
   gulp.watch('../src/pug-sass/mozilla/**/*.pug', ['pug']);
-  gulp.watch('../src/pug-sass/mozilla/*.pug', ['pug']);
-
-  gulp.watch('../src/pug-sass/webkit/**/*.sass', ['webkit_sass']);
-  gulp.watch('../src/pug-sass/webkit/*.sass', ['webkit_sass']);
 
   gulp.watch('../src/pug-sass/webkit/**/*.pug', ['pug']);
-  gulp.watch('../src/pug-sass/webkit/*.pug', ['pug']);
+
+
 
   gulp.watch('../src/pug-sass/*.pug', ['pug']);
   gulp.watch('../src/img/**/*.pug', ['pug']);
