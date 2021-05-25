@@ -6,6 +6,21 @@ const prefixer            = require('gulp-autoprefixer');
 const pug                 = require('gulp-pug');
 const plumber             = require('gulp-plumber');
 const sourcemaps          = require('gulp-sourcemaps');
+const imagemin = require('gulp-imagemin');
+const webp = require('imagemin-webp');
+
+
+
+gulp.task( 'imgmin', () => {
+  return gulp.src('../src/img/*.*')
+    .pipe(imagemin(["*.png", "*.jpg"], "images", {
+      use: [
+        webp({ quality: 75})
+      ]
+    }))
+    .pipe(gulp.dest('../src/img_webp/'));
+});
+
 
 
 //запуск шаблонизатора pug
@@ -22,7 +37,6 @@ gulp.task('pug', () =>  {
   .pipe(rename({
     extname: '.php'
   }))
-  // .pipe(gulp.dest('../src/php/'))
   .pipe(gulp.dest('../'))
   .pipe(plumber.stop())
 });
