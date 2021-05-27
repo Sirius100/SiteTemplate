@@ -1,13 +1,22 @@
 const gulp                = require('gulp');
 const rename              = require("gulp-rename");
-const sass                = require('gulp-ruby-sass');
+// const sass                = require('gulp-ruby-sass');
+const dartsass            = require('gulp-dart-sass');
 const concat              = require('gulp-concat');
 const prefixer            = require('gulp-autoprefixer');
 const pug                 = require('gulp-pug');
 const plumber             = require('gulp-plumber');
 const sourcemaps          = require('gulp-sourcemaps');
-const imagemin = require('gulp-imagemin');
-const webp = require('imagemin-webp');
+const imagemin            = require('gulp-imagemin');
+const webp                = require('imagemin-webp');
+
+
+
+gulp.task('dart_sass', () => {
+  return gulp.src('../src/pug-sass/mozilla/*.sass')
+    .pipe(dartsass ().on('error', dartsass.logError))
+    .pipe(gulp.dest('../src/css'));
+});
 
 
 
@@ -43,41 +52,47 @@ gulp.task('pug', () =>  {
 
 
 
-gulp.task('mozilla_sass', () => {
-  console.log('Start Sourcemap!!!');
-  console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
-  console.log('Start Sass!!!');
-  console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
-  return sass(['../src/pug-sass/mozilla/*.sass'])
-    .on('error', sass.logError)
-    .pipe(sourcemaps.init({loadMaps : true}))
-    .pipe(prefixer())
-    .pipe(concat('style.css'))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('../src/css/'))
-});
-gulp.task('webkit_sass', () => {
-  console.log('Start Sourcemap!!!');
-  console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
-  console.log('Start Sass!!!');
-  console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
-  return sass(['../src/pug-sass/webkit/*.sass'])
-    .on('error', sass.logError)
-    .pipe(sourcemaps.init({loadMaps : true}))
-    .pipe(prefixer())
-    .pipe(concat('stylechrome.css'))
+// gulp.task('mozilla_sass', () => {
+//   console.log('Start Sourcemap!!!');
+//   console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
+//   console.log('Start Sass!!!');
+//   console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
+//   return sass(['../src/pug-sass/mozilla/*.sass'])
+//     .on('error', sass.logError)
+//     .pipe(sourcemaps.init({loadMaps : true}))
+//     .pipe(prefixer())
+//     .pipe(concat('style.css'))
+//     .pipe(sourcemaps.write())
+//     .pipe(gulp.dest('../src/css/'))
+// });
+// gulp.task('webkit_sass', () => {
+//   console.log('Start Sourcemap!!!');
+//   console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
+//   console.log('Start Sass!!!');
+//   console.log('*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*');
+//   return sass(['../src/pug-sass/webkit/*.sass'])
+//     .on('error', sass.logError)
+//     .pipe(sourcemaps.init({loadMaps : true}))
+//     .pipe(prefixer())
+//     .pipe(concat('stylechrome.css'))
 
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('../src/css'))
-});
+//     .pipe(sourcemaps.write())
+//     .pipe(gulp.dest('../src/css'))
+// });
 
 
 
 gulp.task('watch', () => {
-  gulp.watch('../src/pug-sass/mozilla/**/*.sass', ['mozilla_sass']);
-  gulp.watch('../src/pug-sass/mozilla/*.sass', ['mozilla_sass']);
-  gulp.watch('../src/pug-sass/webkit/**/*.sass', ['webkit_sass']);
-  gulp.watch('../src/pug-sass/webkit/*.sass', ['webkit_sass']);
+
+
+  gulp.watch('../src/pug-sass/mozilla/*.sass', ['dart_sass']);
+  gulp.watch('../src/pug-sass/*.sass', ['dart_sass']);
+
+
+  // gulp.watch('../src/pug-sass/mozilla/**/*.sass', ['mozilla_sass']);
+  // gulp.watch('../src/pug-sass/mozilla/*.sass', ['mozilla_sass']);
+  // gulp.watch('../src/pug-sass/webkit/**/*.sass', ['webkit_sass']);
+  // gulp.watch('../src/pug-sass/webkit/*.sass', ['webkit_sass']);
 
   gulp.watch('../src/pug-sass/mozilla/**/*.pug', ['pug']);
 

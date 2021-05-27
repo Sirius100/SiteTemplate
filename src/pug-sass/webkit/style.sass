@@ -1,27 +1,25 @@
 
 //файл переменных и импортов
-@import "../_var.sass"
+@use "../var.sass"
 //файл шрифтов
-@import "../_fonts.sass"
-
-
+@use "../fonts.sass"
+@use "../global.sass"
 
 
 // import моих стилей
-// @import
-// @import
-// @import
-// @import
-// @import
-// @import
-// @import
-// @import
-// @import
-// @import
-// @import
+// @use
+// @use
+// @use
+// @use
+// @use
+// @use
+// @use
+// @use
+// @use
+// @use
+// @use
+
+@use '_media_mixin.sass'
 
 body
-  background: $big-color4
-
-
-@import '_media_mixin.sass'
+  background: var.$big-color4
