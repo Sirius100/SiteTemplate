@@ -86,6 +86,7 @@ gulp.task('watch', () => {
 
 
   gulp.watch('../src/pug-sass/mozilla/*.sass', ['dart_sass']);
+  gulp.watch('../src/pug-sass/mozilla/**/*.sass', ['dart_sass']);
   gulp.watch('../src/pug-sass/*.sass', ['dart_sass']);
 
 
