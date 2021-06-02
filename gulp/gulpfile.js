@@ -13,15 +13,21 @@ const sourcemaps                    = require('gulp-sourcemaps');
 const imagemin                      = require('gulp-imagemin');
 const webp                          = require('imagemin-webp');
 
-
+// секция функций и тасков для сборки готового сайта build
 function uglifymin(){
-  return src("../src/js/jquery-3.6.0.js")
-    .pipe(rename("bundle.min.js"))
+  return src([
+      "../src/js/**/*.js",
+      "node_modules/bootstrap/dist/js/bootstrap.min.js",
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+    ])
+    // .pipe(rename("bundle.min.js"))
     .pipe(sourcemaps.init())
     .pipe(uglify())
+    .pipe(concat('bundle.min.js'))
     .pipe(sourcemaps.write())
     .pipe(dest("../dist/js"));
 }
+
 
 function imgcompressed(){
 	src('../src/img/*')
@@ -39,7 +45,34 @@ function imgcompressed(){
 		.pipe(dest('../dist/img'))
   };
 
+// эта функция вызывается командой build , когда сайт готов и собирается проект
+function styles_min(){
+  return src('../src/pug-sass/mozilla/*.sass')
+    // .pipe(prefixer({cascade: false}))
+    // ключ outputStyle имеет несколько значений:
+    //  'compressed' - сжатый вид
+    //  'expanded' - читабельный вид
+    .pipe(sourcemaps.init())
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(prefixer({
+      browsers: ['last 10 versions'],
+      cascade: false}))
+    .pipe(concat('style.min.css'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(dest('../dist/css'))
+    .pipe(browserSync.stream());
+}
 
+function create_dir_bild(){
+  return src([
+    '../src/css/*',
+    '../src/font/**/*',
+    '../src/*.php'
+    ], {base: '../src'})
+    .pipe(dest('../dist'));
+}
+
+// секция функций и тасков для webde-йва  сайта
 function styles(){
   return src('../src/pug-sass/mozilla/*.sass')
     // .pipe(prefixer({cascade: false}))
@@ -56,23 +89,6 @@ function styles(){
     .pipe(dest('../src/css'))
     .pipe(browserSync.stream());
 }
-function styles_dist(){
-  return src('../src/pug-sass/mozilla/*.sass')
-    // .pipe(prefixer({cascade: false}))
-    // ключ outputStyle имеет несколько значений:
-    //  'compressed' - сжатый вид
-    //  'expanded' - читабельный вид
-    .pipe(sourcemaps.init())
-
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(prefixer({
-      browsers: ['last 10 versions'],
-      cascade: false}))
-    .pipe(concat('style.min.css'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(dest('../dist/css'))
-    .pipe(browserSync.stream());
-}
 
 function funcpug(){
   return src('../src/pug-sass/*.pug')
@@ -87,9 +103,20 @@ function funcpug(){
     .pipe(plumber.stop())
     .pipe(dest('../src'))
     .pipe(browserSync.stream());
-
 }
-
+function uglifymindev(){
+  return src([
+      "../src/js/**/*.js",
+      "node_modules/bootstrap/dist/js/bootstrap.min.js",
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+    ])
+    // .pipe(rename("bundle.min.js"))
+    .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(concat('bundle.min.js'))
+    .pipe(sourcemaps.write())
+    .pipe(dest("../src/js"));
+}
 
 function browser(){
   browserSync.init({
@@ -104,26 +131,35 @@ function watching(){
   watch([
     '../src/pug-sass/mozilla/*.sass',
     '../src/pug-sass/mozilla/**/*.sass',
-    '../src/pug-sass/*.sass'], styles('expanded', '../src/css'));
+    '../src/pug-sass/*.sass'], styles);
 
   watch([
     '../src/pug-sass/*.pug',
-    '../src/pug-sass/mozilla/header/_header*.pug',
+    '../src/pug-sass/**/*.pug',
     '../src/img/**/*.pug',
     '../src/img/*.pug'], funcpug);
+  watch([
+    "../src/js/**/*",
+    "!../src/js/bundle.min.js"
+  ], uglifymindev)
+
   watch("../src/*.php").on('change', browserSync.reload);
+  watch(["../src/js/**/*","!../src/js/bundle.min.js"]).on('change', browserSync.reload);
   watch("../src/css/*.css").on('change', browserSync.reload);
 }
 
-exports.uglifymin     = uglifymin;
-exports.imgcompressed = imgcompressed;
-exports.browser       = browser;
-exports.styles        = styles;
-exports.styles_dist   = styles_dist;
-exports.funcpug       = funcpug;
-exports.watching      = watching;
+exports.uglifymin         = uglifymin;
+exports.imgcompressed     = imgcompressed;
+exports.browser           = browser;
+exports.styles_min        = styles_min;
+exports.create_dir_bild   = create_dir_bild;
+
+exports.styles            = styles;
+exports.funcpug           = funcpug;
+exports.uglifymindev      = uglifymindev;
+exports.watching          = watching;
 
 
 
 exports.default = parallel(browser, watching);
-exports.build = parallel(uglifymin, imgcompressed, styles_dist);
+exports.build = parallel(uglifymin, imgcompressed, styles_min, create_dir_bild);
